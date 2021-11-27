@@ -20,18 +20,23 @@ public class UserController {
 
     private final UsersServices usersServices;
 
-    @GetMapping("/userId")
+    @GetMapping("/list")
     public ResponseEntity<ResponseData<List<User>>>  get(@PathVariable List<String> userId){
-         return ResponseEntity.ok(usersServices.get(userId));
+         return ResponseEntity.ok(usersServices.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<ResponseData<User>> create(@RequestBody User user ) {
         return ResponseEntity.ok(usersServices.create(user));
     }
 
-    @PutMapping
+    @PutMapping("/edit")
     public ResponseEntity<ResponseData<User>> update(@RequestBody User user){
-        return null;
+        return ResponseEntity.ok(usersServices.update(user));
+    }
+
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<ResponseData<String>> delete(@PathVariable String userId){
+        return ResponseEntity.ok(usersServices.delete(userId));
     }
 }
