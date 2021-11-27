@@ -29,6 +29,6 @@ public class User {
 
     private String phone;
 
-    private boolean Deleted ;
+    private boolean Deleted = false;
 
 }
