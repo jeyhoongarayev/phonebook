@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:phonebook}?createDatabaseNotExist=true
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:123456}
+    tomcat:
+      test-while-idle: true
+      validation-query: 1
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
