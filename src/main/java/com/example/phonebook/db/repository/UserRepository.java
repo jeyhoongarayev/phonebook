@@ -9,11 +9,6 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, String> {
 
 
-    List<User> findById(List<String> userId);
-
-    ResponseData<List<User>> findAllByIsActive(int isActive);
-
-
     User findByUserIdAndDeletedIsFalse(String userId);
 
     List<User> findAllByDeletedIsFalse();
