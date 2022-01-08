@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -50,7 +51,7 @@ public class UserServicesImpl implements UsersServices {
     public List<User> getAll() {
         List<User> listOfUsers = userRepository.findAllByDeletedIsFalse();
         if (listOfUsers.isEmpty()) {
-            return null;
+            return Collections.emptyList();
         }
         return listOfUsers;
     }
