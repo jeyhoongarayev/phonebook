@@ -24,7 +24,6 @@
             src/main/java/com/example/phonebook/api/*,
             src/main/java/com/example/phonebook/db/**,
             src/main/java/com/example/phonebook/monitoring/*,
-            src/main/java/com/example/phonebook/services/**,
             src/main/java/com/example/phonebook/PhonebookApplication.java
         </sonar.coverage.exclusions>
         <maven.compiler.source>8</maven.compiler.source>
