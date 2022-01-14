@@ -131,6 +131,18 @@ class UserServicesImplTest {
         assertTrue(userRepository.findAllByDeletedIsFalse().isEmpty());
     }
 
+    @Test
+    void deleteUserThenSuccessResult2() {
+        // arrange
+        when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(null);
+
+        // act
+        userServiceImpl.delete(ID);
+
+        // assert
+        verify(userRepository).findByUserIdAndDeletedIsFalse(any());
+    }
+
     private void setUpUser() {
         user = User.builder()
                 .userId(ID)
