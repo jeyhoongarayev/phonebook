@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-final
+  namespace: backend-app-final
+  labels:
+    app: backend-app
+    env: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+    metadata:
+      labels:
+        app: backend-app
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: backend-app
+          image: ceyhunqarayev/phonebookfinal:latest
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: DB_URL
+              value: jdbc:postgresql://ec2-52-31-219-113.eu-west-1.compute.amazonaws.com:5432/d2l9l5ckpt01di
+            - name: DB_USER
+              value: jefniowckghfhw
+            - name: DB_PASSWORD
+              value: cac7a2183afba5ddb8e5c034d4d9ef0c986cee55011a4b3c75293aa19090ed23
+          volumeMounts:
+            - name: back-app-config
+              mountPath: /app/config
+      volumes:
+        - name: back-app-config
+          configMap:
+            name: back-app-config

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: back-app-config
+  namespace: backend-app-final
+data:
+  backend-url: localhost:8080

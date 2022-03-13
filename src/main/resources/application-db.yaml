@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:phonebook}?createDatabaseNotExist=true
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:123456}
+    url: ${DB_URL:jdbc:postgresql://ec2-52-31-219-113.eu-west-1.compute.amazonaws.com:5432/d2l9l5ckpt01di}
+    username: ${DB_USER:jefniowckghfhw}
+    password: ${DB_PASSWORD:cac7a2183afba5ddb8e5c034d4d9ef0c986cee55011a4b3c75293aa19090ed23}
     tomcat:
       test-while-idle: true
       validation-query: 1
