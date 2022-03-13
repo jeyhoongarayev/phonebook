@@ -1,4 +1,4 @@
-package com.example.phonebook;
+package com.example.phonebook.services.impl;
 
 import com.example.phonebook.db.entites.User;
 import com.example.phonebook.db.repository.UserRepository;
@@ -149,6 +149,18 @@ class UserServicesImplTest {
                 .name(NAME)
                 .phone(PHONE)
                 .build();
+    }
+
+    @Test
+    void testGet() {
+        User user = new User();
+        user.setDeleted(true);
+        user.setName("Name");
+        user.setPhone("4105551212");
+        user.setUserId("42");
+        when(this.userRepository.findByUserIdAndDeletedIsFalse((String) any())).thenReturn(user);
+        assertSame(user, this.userServiceImpl.get("42"));
+        verify(this.userRepository).findByUserIdAndDeletedIsFalse((String) any());
     }
 
 }
