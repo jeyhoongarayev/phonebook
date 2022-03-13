@@ -126,18 +126,18 @@ class UserServicesImplTest {
         // arrange
         when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(user);
 
-        User actualAddUserResult = userServiceImpl.create(user);
+        userServiceImpl.delete(ID);
         // act
 
         // assert
         verify(userRepository).findByUserIdAndDeletedIsFalse(any());
-        assertTrue(userRepository.findAllByDeletedIsFalse().isEmpty());
+        assertThat(userRepository.findAllByDeletedIsFalse().isEmpty());
     }
 
     @Test
     void deleteUserThenSuccessResult2() {
         // arrange
-        when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(null);
+        when(userRepository.findById(any())).thenReturn(null);
 
         // act
         userServiceImpl.delete(ID);
@@ -156,26 +156,27 @@ class UserServicesImplTest {
 
     @Test
     void getUserIdThenSuccessResult() {
-        when(userRepository.findById(any())).thenReturn(Optional.of(user));
-        User userResponse = userServiceImpl.get(ID);
-        assertThat(userResponse.getName()).isSameAs(NAME);
-        assertThat(userResponse.getUserId()).isSameAs(ID);
-        assertThat(userResponse.getPhone()).isSameAs(PHONE);
-        verify(userRepository).findById(ID);
+        when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(user);
+        User actualUsers = userServiceImpl.get(ID);
+
+        assertThat(actualUsers.getName()).isSameAs(NAME);
+        assertThat(actualUsers.getUserId()).isSameAs(ID);
+        assertThat(actualUsers.getPhone()).isSameAs(PHONE);
+        verify(userRepository).findByUserIdAndDeletedIsFalse(ID);
     }
 
 
     @Test
     void getUserIdThenNullResult() {
         // arrange
-        when(userRepository.findById(any())).thenReturn(Optional.empty());
+        when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(null);;
 
         // act
         User userResponse = userServiceImpl.get(ID);
 
         // assert
         assertThat(userResponse).isSameAs(null);
-        verify(userRepository).findById(ID);
+        verify(userRepository).findByUserIdAndDeletedIsFalse(ID);
     }
 
 
