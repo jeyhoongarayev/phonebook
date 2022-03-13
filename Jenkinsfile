@@ -36,16 +36,16 @@ environment {
                  }
             }
         }
-        stage('Pushing Docker') {
-            steps {
-                 script {
-                     withCredentials([string(credentialsId: 'Docker-Hub-Password', variable: 'dockerhubpwd')]) {
-                         sh 'docker login -u ceyhunqarayev -p dockerhubpwd'
-                     }
-                     dockerImage.push('latest')
-                 }
-            }
-        }
+//         stage('Pushing Docker') {
+//             steps {
+//                  script {
+//                      withCredentials([string(credentialsId: 'Docker-Hub-Password', variable: 'dockerhubpwd')]) {
+//                          sh 'docker login -u ceyhunqarayev -p dockerhubpwd'
+//                      }
+//                      dockerImage.push('latest')
+//                  }
+//             }
+//         }
         stage('Deploying on Kubernetes') {
             steps {
                 script {
