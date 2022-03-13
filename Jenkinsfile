@@ -5,21 +5,21 @@ environment {
   }
     agent any
     stages {
-        stage ('Compile') {
+        stage ('Compiling App') {
             steps {
                 withMaven(maven : 'maven_3') {
                     sh 'mvn clean install'
                 }
             }
         }
-        stage ('Unit Tests') {
+        stage ('Unit Testing') {
             steps {
                 withMaven(maven : 'maven_3') {
                     sh 'mvn test'
                 }
             }
         }
-        stage ('SonarQube analysis') {
+        stage ('SonarQube checking') {
             steps {
                 withMaven(maven : 'maven_3') {
                     withSonarQubeEnv('SonarQube') {
@@ -29,14 +29,14 @@ environment {
                 waitForQualityGate abortPipeline: true
             }
         }
-        stage('Build Docker Image') {
+        stage('Building Docker') {
             steps {
                  script {
                     dockerImage = docker.build imagename
                  }
             }
         }
-        stage('Push Docker Image') {
+        stage('Pushing Docker') {
             steps {
                  script {
                      withCredentials([string(credentialsId: 'Docker-Hub-Password', variable: 'dockerhubpwd')]) {
@@ -46,7 +46,7 @@ environment {
                  }
             }
         }
-        stage('Deploy on K8S') {
+        stage('Deploying on Kubernetes') {
             steps {
                 script {
                    sh 'kubectl rollout restart deployment/backend-final -n backend-app-final'

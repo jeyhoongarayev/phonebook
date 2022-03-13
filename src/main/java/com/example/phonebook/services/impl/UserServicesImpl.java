@@ -21,6 +21,12 @@ public class UserServicesImpl implements UsersServices {
     private final UserRepository userRepository;
 
     @Override
+    public User get(String userId) {
+        User user = userRepository.findByUserIdAndDeletedIsFalse(userId);
+        return user;
+    }
+
+    @Override
     public User create(User user) {
         User us = userRepository.save(user);
 
