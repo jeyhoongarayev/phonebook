@@ -126,8 +126,8 @@ class UserServicesImplTest {
         // arrange
         when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(user);
 
+        User actualAddUserResult = userServiceImpl.create(user);
         // act
-        userServiceImpl.delete(ID);
 
         // assert
         verify(userRepository).findByUserIdAndDeletedIsFalse(any());
@@ -155,12 +155,26 @@ class UserServicesImplTest {
     }
 
     @Test
-    void testGet() {
+    void getUserIdThenSuccessResult() {
         when(userRepository.findById(any())).thenReturn(Optional.of(user));
         User userResponse = userServiceImpl.get(ID);
         assertThat(userResponse.getName()).isSameAs(NAME);
         assertThat(userResponse.getUserId()).isSameAs(ID);
         assertThat(userResponse.getPhone()).isSameAs(PHONE);
+        verify(userRepository).findById(ID);
+    }
+
+
+    @Test
+    void getUserIdThenNullResult() {
+        // arrange
+        when(userRepository.findById(any())).thenReturn(Optional.empty());
+
+        // act
+        User userResponse = userServiceImpl.get(ID);
+
+        // assert
+        assertThat(userResponse).isSameAs(null);
         verify(userRepository).findById(ID);
     }
 
