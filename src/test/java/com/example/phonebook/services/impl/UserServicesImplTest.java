@@ -155,7 +155,7 @@ class UserServicesImplTest {
     }
 
     @Test
-    void getUserIdThenSuccessResult() {
+    void getUserThenSuccessResult() {
         when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(user);
         User actualUsers = userServicesImpl.get(ID);
 
@@ -167,7 +167,7 @@ class UserServicesImplTest {
 
 
     @Test
-    void getUserIdThenNullResult() {
+    void getUserThenNullResult() {
         // arrange
         when(userRepository.findByUserIdAndDeletedIsFalse(any())).thenReturn(null);;
 

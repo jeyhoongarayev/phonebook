@@ -18,7 +18,7 @@ public class UserController {
     private final UsersServices usersServices;
 
     @GetMapping
-    public List<User> get(@PathVariable List<String> userId){
+    public List<User> getAllUsers(@PathVariable List<String> userId){
          return usersServices.getAll();
     }
 
@@ -38,5 +38,5 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public void get(@PathVariable String userId){ usersServices.get(userId); }
+    public void getUser(@PathVariable String userId){ usersServices.get(userId); }
 }
