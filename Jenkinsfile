@@ -1,6 +1,6 @@
 pipeline {
 environment {
-    imagename = "ceyhunqarayev/phonebookfinal:latest"
+    imagename = "ceyhunqarayev/phonebookfinal"
     dockerImage = ''
   }
     agent any
