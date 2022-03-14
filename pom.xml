@@ -16,6 +16,7 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
+        <sonar.tests>${project.basedir}/src/test/</sonar.tests>
         <sonar.coverage.exclusions>
             src/main/java/com/example/phonebook/db/**,
             src/main/java/com/example/phonebook/monitoring/*,
@@ -33,13 +34,13 @@
             </activation>
             <properties>
                 <sonar.host.url>
-                    http://localhost:9090/
+                    http://localhost:9095/
                 </sonar.host.url>
                 <sonar.login>
-                    36859166cd0bbde25137051a4f6cca5caa1bceb7
+                    2d08c71463e684c88345f30483283d10d43b8dd8
                 </sonar.login>
                 <sonar.projectKey>
-                    phonebook-backend
+                    phonebook-app-jyhn
                 </sonar.projectKey>
             </properties>
         </profile>
@@ -50,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <!--                <version>3.1</version>-->
                 <configuration>
                     <source>11</source>
                     <target>11</target>
@@ -59,36 +60,22 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <filters>
-                                <filter>
-                                    <artifact>*:*</artifact>
-                                    <excludes>
-                                        <exclude>META-INF/*.SF</exclude>
-                                        <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>
-                                    </excludes>
-                                </filter>
-                            </filters>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <manifestEntries>
-                                        <Main-Class>com.example.phonebook.PhonebookApplication</Main-Class>
-                                    </manifestEntries>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.example.phonebook.PhonebookApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
             </plugin>
 
             <plugin>

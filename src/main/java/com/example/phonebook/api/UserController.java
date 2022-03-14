@@ -17,17 +17,17 @@ public class UserController {
 
     private final UsersServices usersServices;
 
-    @GetMapping
-    public List<User> getAllUsers(@PathVariable List<String> userId){
+    @GetMapping("/user")
+    public List<User> getAllUsers(){
          return usersServices.getAll();
     }
 
-    @PostMapping
+    @PostMapping("/user")
     public User create(@RequestBody User user ) {
         return usersServices.create(user);
     }
 
-    @PutMapping
+    @PutMapping("/user")
     public User update(@RequestBody User user){
         return usersServices.update(user);
     }
