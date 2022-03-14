@@ -39,8 +39,8 @@ environment {
         stage('Pushing Docker') {
             steps {
                  script {
-                     withCredentials([string(credentialsId: 'Docker-Hub-Password', variable: 'dockerhubpwd')]) {
-                         sh 'docker login -u ceyhunqarayev -p dockerhubpwd'
+                     withCredentials([string(credentialsId: 'Docker-Hub-Password', variable: '${dockerhubpwd}')]) {
+                         sh 'docker login -u ceyhunqarayev -p ${dockerhubpwd}'
                      }
                      dockerImage.push('latest')
                  }
