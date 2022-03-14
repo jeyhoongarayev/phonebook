@@ -109,5 +109,6 @@ class UserControllerTest {
                 .perform(requestBuilder);
         actualPerformResult.andExpect(MockMvcResultMatchers.status().is(500));
     }
+
 }
 
